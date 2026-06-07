@@ -37,8 +37,7 @@ A REST API that accepts a natural-language prompt and returns a generated React 
 1. **Clone the repository**
 
    ```bash
-   git clone <repo-url>
-   cd "Assignment 2/backend"
+   cd "backend"
    ```
 
 2. **Install dependencies**
@@ -174,7 +173,6 @@ graph TD
     end
 
     Ollama["Ollama\n(local LLM)"]
-    DB["MySQL\n(Knex migrations)"]
     Docs["Swagger UI\n(/api-docs)"]
 
     Client -->|POST /api/generate| MW
@@ -193,6 +191,5 @@ graph TD
     Generator <-->|ChatOllama| Ollama
     Fixer <-->|ChatOllama| Ollama
 
-    Express -.->|migrations| DB
     Express -.->|OpenAPI spec| Docs
 ```

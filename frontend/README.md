@@ -35,8 +35,7 @@ A browser-based tool that accepts a natural-language prompt and returns a genera
 1. **Clone the repository**
 
    ```bash
-   git clone <repo-url>
-   cd "Assignment 2/frontend"
+   cd "frontend"
    ```
 
 2. **Install dependencies**
