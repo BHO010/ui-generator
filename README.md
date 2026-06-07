@@ -2,11 +2,6 @@
 
 ## Installation Guide
 
-### Prerequisites
-
-- **Node.js** 22
-- **npm** 9 or later (or compatible package manager)
-
 ### Steps
 
 1. **Clone the repository**

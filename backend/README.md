@@ -29,7 +29,8 @@ A REST API that accepts a natural-language prompt and returns a generated React 
 
 ### Prerequisites
 
-- **Node.js** 18 or later
+- **Node.js** 22
+- npm 9 or later (or compatible package manager)
 - **Ollama** running locally with your chosen model
 
 ### Steps
@@ -151,7 +152,6 @@ The validator routes back to the fixer up to **3 times** before accepting whatev
 ```mermaid
 graph TD
     Client["Client"]
-    Express["Express\n(validate · rate-limit · cors)"]
 
     subgraph LangGraph["LangGraph Pipeline"]
         Planner["planner"]
@@ -162,7 +162,7 @@ graph TD
 
     Ollama["Ollama"]
 
-    Client -->|POST /api/generate| Express
+    Client -->|/api/generate/stream| Express
     Express --> Planner
     Planner --> Generator
     Generator --> Validator
