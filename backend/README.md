@@ -152,7 +152,6 @@ The validator routes back to the fixer up to **3 times** before accepting whatev
 ```mermaid
 graph TD
     Client["Client"]
-    Express["Express\n(validate · rate-limit · cors)"]
 
     subgraph LangGraph["LangGraph Pipeline"]
         Planner["planner"]
@@ -163,7 +162,7 @@ graph TD
 
     Ollama["Ollama"]
 
-    Client -->|POST /api/generate| Express
+    Client -->|/api/generate/stream| Express
     Express --> Planner
     Planner --> Generator
     Generator --> Validator
