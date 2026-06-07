@@ -30,6 +30,7 @@ A REST API that accepts a natural-language prompt and returns a generated React 
 ### Prerequisites
 
 - **Node.js** 22
+- npm 9 or later (or compatible package manager)
 - **Ollama** running locally with your chosen model
 
 ### Steps
