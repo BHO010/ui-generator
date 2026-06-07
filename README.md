@@ -14,6 +14,8 @@
 
    Refer to their individual README.md file
 
+**Note: You can run the frontend without the backend.**
+
 ---
 
 ## Backend
