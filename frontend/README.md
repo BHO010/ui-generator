@@ -75,7 +75,7 @@ For automatically managing dark/light theme
 
 ---
 
-### `Layout.*`
+### `Layout`
 
 **Import:** `@lifesg/react-design-system/layout`
 
@@ -83,7 +83,7 @@ Create a responsive layout with 2 sections.
 
 ---
 
-### `Typography.*`
+### `Typography`
 
 **Import:** `@lifesg/react-design-system/typography`
 
