@@ -32,10 +32,10 @@ A browser-based tool that accepts a natural-language prompt and returns a genera
 
 ### Steps
 
-1. **Clone the repository**
+1. **Navigate to repository**
 
    ```bash
-   cd "frontend"
+   cd frontend
    ```
 
 2. **Install dependencies**
@@ -47,7 +47,7 @@ A browser-based tool that accepts a natural-language prompt and returns a genera
 3. **Configure environment variables** (see [Environment Variables](#environment-variables))
 
    ```bash
-   cp .env.example .env   # or create .env manually
+   copy .env.example .env   # or create .env manually
    ```
 
 4. **Start the development server**
@@ -67,95 +67,59 @@ A browser-based tool that accepts a natural-language prompt and returns a genera
 
 ## LifeSG React Design System Components
 
-All components are imported from `@lifesg/react-design-system` sub-paths and styled via `styled-components` using the library's `Colour.*` design tokens.
-
 ### `DSThemeProvider` + `LifeSGTheme`
 
-**Import:** `@lifesg/react-design-system/theme`  
-**Used in:** `App.tsx`
+**Import:** `@lifesg/react-design-system/theme`
 
-Wraps the entire application and injects the active theme (light or dark) into every LifeSG component and `Colour.*` token interpolation. Required for any design-system component to render correctly. The active variant (`LifeSGTheme.light` / `LifeSGTheme.dark`) is driven by the `colourMode` value in the Redux `themeSlice`.
+For automatically managing dark/light theme
 
 ---
 
 ### `Typography.*`
 
-**Import:** `@lifesg/react-design-system/typography`  
-**Used in:** `TopNav`, `PromptPanel`, `ResultPanel`, `OutputPanel`, `PricingCard`
+**Import:** `@lifesg/react-design-system/typography`
 
-Variants used across the app:
-
-| Variant                | Where                                                  |
-| ---------------------- | ------------------------------------------------------ |
-| `Typography.HeadingXL` | Price display in `PricingCard`                         |
-| `Typography.HeadingSM` | Section headings in `ResultPanel`, `PricingCard`       |
-| `Typography.HeadingXS` | App title in `TopNav`, state headings in `ResultPanel` |
-| `Typography.HeadingMD` | Prompt panel section label                             |
-| `Typography.BodyMD`    | Descriptive text, feature list items                   |
-| `Typography.BodySM`    | Sub-labels, billing notes                              |
-| `Typography.BodyXS`    | Meta information (model name, timestamp)               |
-
-Using `Typography.*` instead of raw `<p>` or `<h*>` tags ensures every text node inherits the correct font family, weight, line height, and responsive scaling from the design system theme — eliminating manual font-size decisions.
+Ensures that text are standardised.
 
 ---
 
-### `Button.Default`
+### `Button`
 
-**Import:** `@lifesg/react-design-system/button`  
-**Used in:** `PromptPanel`, `ResultPanel`, `PricingCard`
+**Import:** `@lifesg/react-design-system/button`
 
-| `styleType`   | Where                                                           | Purpose                         |
-| ------------- | --------------------------------------------------------------- | ------------------------------- |
-| `"default"`   | "Generate UI" in `PromptPanel`, "Get Started" in `PricingCard`  | Primary call-to-action          |
-| `"secondary"` | "Try again" in `ResultPanel` error state                        | Non-destructive recovery action |
-| `"light"`     | "Reset" in `ResultPanel`, example chip buttons in `PromptPanel` | Low-emphasis actions            |
-
-The `loading` prop (used on the Generate button) provides a built-in spinner state without requiring a separate loading indicator component.
+Ensure that buttons across the application are standardised in terms of color and size.
 
 ---
 
 ### `Tab` + `Tab.Item`
 
-**Import:** `@lifesg/react-design-system/tab`  
-**Used in:** `OutputPanel`
+**Import:** `@lifesg/react-design-system/tab`
 
-Renders the **Preview** / **Code** tab bar beneath the generated result. The `fullWidthIndicatorLine` prop stretches the underline indicator to the full container width, matching the layout's visual treatment. Using the design-system `Tab` ensures consistent keyboard navigation, focus management, and active-indicator animation that would otherwise require manual implementation.
+Used as a toggle between different tabs.
 
 ---
 
 ### `Pill`
 
-**Import:** `@lifesg/react-design-system/pill`  
-**Used in:** `PricingCard`
+**Import:** `@lifesg/react-design-system/pill`
 
-Renders the **"Most Popular"** badge pinned above the pricing card. The `type="solid"` and `colorType="primary"` props apply the brand primary fill, making the badge stand out without needing custom color overrides.
+To create a chip or badge shape component.
 
 ---
 
 ### `Card`
 
-**Import:** `@lifesg/react-design-system/card`  
-**Used in:** `PricingCard.styles.ts` (as `styled(Card)`)
+**Import:** `@lifesg/react-design-system/card`
 
-Provides the surface background, border-radius, and elevation shadow for the pricing card. Extending it with `styled(Card)` allows adding custom padding and border rules while inheriting the correct background token (`bg-primary`) and ensuring the card respects the active theme.
+Use Card component as a box. Ensure that color is base on active theme.
 
 ---
 
 ### `Divider`
 
-**Import:** `@lifesg/react-design-system/divider`  
-**Used in:** `PricingCard`
+**Import:** `@lifesg/react-design-system/divider`
 
-Draws the horizontal rule between the plan header and the feature list. Using `Divider` ensures the separator color maps to the correct `border` token for both light and dark themes, instead of a hardcoded `border-top` color.
-
----
-
-### `TickCircleFillIcon`
-
-**Import:** `@lifesg/react-icons/tick-circle-fill`  
-**Used in:** `PricingCard.styles.ts` (as `styled(TickCircleFillIcon)`)
-
-Renders the checkmark beside each feature list item. Styled via `Colour["icon-primary"]` so the icon color follows the theme, and sized to `18px` to align vertically with `Typography.BodyMD` text.
+Used as a divider. Component is used to ensure that it map to the theme.
 
 ---
 

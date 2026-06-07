@@ -30,14 +30,14 @@ A REST API that accepts a natural-language prompt and returns a generated React 
 ### Prerequisites
 
 - **Node.js** 18 or later
-- **Ollama** running locally with your chosen model pulled (default: `llama3`)
+- **Ollama** running locally with your chosen model
 
 ### Steps
 
-1. **Clone the repository**
+1. **Navigate to folder**
 
    ```bash
-   cd "backend"
+   cd backend
    ```
 
 2. **Install dependencies**
@@ -46,13 +46,7 @@ A REST API that accepts a natural-language prompt and returns a generated React 
    npm install
    ```
 
-3. **Pull the Ollama model**
-
-   ```bash
-   ollama pull llama3
-   ```
-
-4. **Configure environment variables**
+3. **Configure environment variables**
 
    ```bash
    copy .env.example .env
@@ -60,7 +54,7 @@ A REST API that accepts a natural-language prompt and returns a generated React 
 
    Edit `.env` with your values — see [Environment Variables](#environment-variables) below.
 
-5. **Start the development server**
+4. **Start the development server**
 
    ```bash
    npm run dev
@@ -156,40 +150,25 @@ The validator routes back to the fixer up to **3 times** before accepting whatev
 
 ```mermaid
 graph TD
-    Client["Client (Frontend)"]
+    Client["Client"]
+    Express["Express\n(validate · rate-limit · cors)"]
 
-    subgraph Express["Express App (app.ts)"]
-        MW["Middleware\n(cors · rate-limit · express.json)"]
-        Routes["/api/generate\n/api/generate/stream"]
-        Controller["generate.controller.ts"]
-        Validation["validate middleware\n(Zod schema)"]
+    subgraph LangGraph["LangGraph Pipeline"]
+        Planner["planner"]
+        Generator["generator"]
+        Validator["validator"]
+        Fixer["fixer\n(max 3 retries)"]
     end
 
-    subgraph LangGraph["LangGraph Pipeline (generate.service.ts)"]
-        Planner["planner node"]
-        Generator["generator node"]
-        Validator["validator node\n(@babel/parser)"]
-        Fixer["fixer node\n(max 3 retries)"]
-    end
+    Ollama["Ollama"]
 
-    Ollama["Ollama\n(local LLM)"]
-    Docs["Swagger UI\n(/api-docs)"]
-
-    Client -->|POST /api/generate| MW
-    Client -->|POST /api/generate/stream SSE| MW
-    MW --> Validation
-    Validation --> Routes
-    Routes --> Controller
-    Controller --> Planner
-    Planner -->|plan| Generator
-    Generator -->|code| Validator
-    Validator -->|valid| Controller
+    Client -->|POST /api/generate| Express
+    Express --> Planner
+    Planner --> Generator
+    Generator --> Validator
+    Validator -->|valid| Express
     Validator -->|errors| Fixer
-    Fixer -->|fixed code| Validator
+    Fixer --> Validator
 
-    Planner <-->|ChatOllama| Ollama
-    Generator <-->|ChatOllama| Ollama
-    Fixer <-->|ChatOllama| Ollama
-
-    Express -.->|OpenAPI spec| Docs
+    Planner & Generator & Fixer <-->|ChatOllama| Ollama
 ```
