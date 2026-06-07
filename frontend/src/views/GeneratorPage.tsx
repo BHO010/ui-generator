@@ -59,7 +59,7 @@ const PageWrapper = styled.div`
 
 const MainLayout = styled.main`
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: 0.8fr 1fr;
   gap: 24px;
   padding: 32px;
   flex: 1;
@@ -67,7 +67,7 @@ const MainLayout = styled.main`
   width: 100%;
   margin: 0 auto;
 
-  ${MediaQuery.MaxWidth.sm} {
+  ${MediaQuery.MaxWidth.md} {
     grid-template-columns: 1fr;
     padding: 20px 16px;
     gap: 20px;

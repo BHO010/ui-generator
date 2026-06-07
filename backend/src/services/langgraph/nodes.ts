@@ -40,6 +40,7 @@ Important: the component must accept NO props. All data and values must be hardc
     ),
     new HumanMessage(`Plan a React component for: ${state.prompt}`),
   ])
+  //console.log("plan stage: ", response.content)
   return { plan: extractContent(response.content) }
 }
 
@@ -64,6 +65,8 @@ Additional rules:
     new HumanMessage(`Generate a React component based on this plan:\n${state.plan}`),
   ])
   const code = extractCodeBlock(extractContent(response.content))
+  
+  //console.log("generate stage: ", code)
   return { code, fixAttempts: 0, finalCode: '' }
 }
 
@@ -90,6 +93,8 @@ export function validatorNode(state: GraphStateType): Partial<GraphStateType> {
   if (errors.length === 0) {
     return { errors: [], finalCode: state.code }
   }
+  
+  //console.log("validate stage: ", errors)
   return { errors }
 }
 
@@ -120,6 +125,7 @@ ${state.code}
     ),
   ])
   const fixedCode = extractCodeBlock(extractContent(response.content))
+  //console.log("fix stage: ", fixedCode)
   return { code: fixedCode, fixAttempts: state.fixAttempts + 1 }
 }
 
@@ -127,5 +133,6 @@ export function routeAfterValidation(state: GraphStateType): string | typeof END
   if (state.errors.length > 0 && state.fixAttempts < MAX_FIX_ATTEMPTS) {
     return 'fixer'
   }
+  //console.log("END pipeline")
   return END
 }
