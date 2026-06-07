@@ -75,6 +75,14 @@ For automatically managing dark/light theme
 
 ---
 
+### `Layout.*`
+
+**Import:** `@lifesg/react-design-system/layout`
+
+Create a responsive layout with 2 sections.
+
+---
+
 ### `Typography.*`
 
 **Import:** `@lifesg/react-design-system/typography`
@@ -91,7 +99,7 @@ Ensure that buttons across the application are standardised in terms of color an
 
 ---
 
-### `Tab` + `Tab.Item`
+### `Tab`
 
 **Import:** `@lifesg/react-design-system/tab`
 

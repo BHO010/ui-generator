@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Layout } from "@lifesg/react-design-system/layout";
 import { Colour, MediaQuery } from "@lifesg/react-design-system/theme";
 import { TopNav } from "../components/TopNav";
 import { PromptPanel } from "../components/PromptPanel";
@@ -35,7 +36,7 @@ export function GeneratorPage() {
   return (
     <PageWrapper>
       <TopNav />
-      <MainLayout>
+      <MainLayout type="grid">
         <PromptPanel isLoading={isLoading} onGenerate={handleGenerate} />
         <ResultPanel
           isLoading={isLoading}
@@ -57,13 +58,10 @@ const PageWrapper = styled.div`
   background: ${Colour.bg};
 `;
 
-const MainLayout = styled.main`
-  display: grid;
+const MainLayout = styled(Layout.Container)`
   grid-template-columns: 0.8fr 1fr;
-  gap: 24px;
   padding: 32px;
   flex: 1;
-  max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 
